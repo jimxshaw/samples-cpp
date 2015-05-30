@@ -40,18 +40,47 @@ int main() {
 	ifstream infile(fn);
 
 	if (infile) {
-		while (infile.getline(fn, 100)) {
-			ToUpperCase(fn);
-			cout << fn << endl;
+		int input,
+			consonants = 0,
+			commas = 0;
+
+		cout << "How do you want your file converted?" << endl;
+		cout << "Input 1 for upper case or input 2 for lower case: ";
+		cin >> input;
+
+		cout << endl;
+
+		if (input == 1) {
+			while (infile.getline(fn, 100)) {
+				consonants += CountConsonants(fn);
+				commas += CountCommas(fn);
+				ToUpperCase(fn);
+				cout << fn << endl;
+				cout << endl;
+				cout << "Consonants: " << consonants << endl;
+				cout << "Commas: " << commas << endl;
+			}
 		}
+		else if (input == 2) {
+			while (infile.getline(fn, 100)) {
+				consonants += CountConsonants(fn);
+				commas += CountCommas(fn);
+				ToLowerCase(fn);
+				cout << fn << endl;
+				cout << endl;
+				cout << "Consonants: " << consonants << endl;
+				cout << "Commas: " << commas << endl;
+			}
+		}
+		else {
+			cout << "Invalid input" << endl;
+		}
+
 		infile.close();
 	}
 	else {
 		cout << "Invalid file" << endl;
 	}
-
-
-
 
 	return 0;
 }
