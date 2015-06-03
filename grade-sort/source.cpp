@@ -6,6 +6,31 @@
 using namespace std;
 typedef char Str[15];
 
+float GetAverage(int g[], int count) {
+	float sum = 0;
+	for (int i = 0; i < count; i++) {
+		sum += g[i];
+	}
+	return sum / count;
+}
+
+int GetHighest(int g[], int count) {
+	int hi = g[0];
+	for (int i = 1; i < count; i++) {
+		if (g[i] > hi) hi = g[i];
+	}
+	return hi;
+}
+
+int GetLowest(int g[], int count) {
+	int lo = g[0];
+	for (int i = 1; i < count; i++) {
+		if (g[i] < lo) lo = g[i];
+	}
+	return lo;
+}
+
+// Selection sort
 void SelectionSort(Str names[], int grades[], int count) {
 	for (int i = 0; i < count; i++) {
 		int largest = i;
@@ -23,6 +48,7 @@ void SelectionSort(Str names[], int grades[], int count) {
 	}
 }
 
+// Bubble sort
 void BubbleSort(Str names[], int grades[], int count) {
 	for (int i = 0; i < count; i++)
 		for (int j = 0; j < count; j++)
@@ -37,10 +63,18 @@ void BubbleSort(Str names[], int grades[], int count) {
 			}
 }
 
-void Print(Str names[], int grades[], int count) {
+// This function is used to print the sorted data in the file
+void PrintSort(Str names[], int grades[], int count) {
 	for (int i = 0; i < count; i++) {
 		cout << setw(15) << left << names[i] << setw(4) << right << grades[i] << endl;
 	}
+}
+
+// This function is used to print the calculated data in the file
+void PrintCalc(int highest, int lowest, int average) {
+		cout << "Highest: " << highest << endl;
+		cout << "Lowest: " << lowest << endl;
+		cout << "Average: " << average << endl;
 }
 
 int main() {
@@ -59,12 +93,22 @@ int main() {
 		for (; infile >> names[i] >> grades[i]; i++);
 		infile.close();
 
-		Print(names, grades, i);
+		cout << "Unsorted: " << endl;
+		PrintSort(names, grades, i);
 
 		cout << endl;
 
+		cout << "Sorted: " << endl;
 		BubbleSort(names, grades, i);
-		Print(names, grades, i);
+		PrintSort(names, grades, i);
+
+		cout << endl;
+
+		int highest = GetHighest(grades, i);
+		int lowest = GetLowest(grades, i);
+		float average = GetAverage(grades, i);
+
+		PrintCalc(highest, lowest, average);
 	}
 	else cout << "Invalid file" << endl;
 
