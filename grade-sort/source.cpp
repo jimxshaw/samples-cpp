@@ -27,6 +27,12 @@ void BubbleSort(int grades[], int count) {
 			}
 }
 
+void Print(Str names[], int grades[], int count) {
+	for (int i = 0; i < count; i++) {
+		cout << setw(15) << left << names[i] << setw(4) << right << grades[i] << endl;
+	}
+}
+
 int main() {
 	Str names[15];
 	int grades[15],
@@ -43,7 +49,12 @@ int main() {
 		for (; infile >> names[i] >> grades[i]; i++);
 		infile.close();
 
+		Print(names, grades, i);
 
+		cout << endl;
+
+		BubbleSort(grades, i);
+		Print(names, grades, i);
 	}
 	else cout << "Invalid file" << endl;
 
