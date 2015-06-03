@@ -6,24 +6,34 @@
 using namespace std;
 typedef char Str[15];
 
-void SelectionSort(int grades[], int count) {
+void SelectionSort(Str names[], int grades[], int count) {
 	for (int i = 0; i < count; i++) {
 		int largest = i;
 		for (int j = largest + 1; j < count; j++)
 			if (grades[j] > grades[largest]) largest = j;
-		int temp = grades[largest];
+		// temp2 is declared as a string but underneath it's still char
+		// thus strcpy() is still needed
+		Str temp;
+		strcpy(temp, names[largest]);
+		strcpy(names[largest], names[i]);
+		strcpy(names[i], temp);
+		int temp2 = grades[largest];
 		grades[largest] = grades[i];
-		grades[i] = temp;
+		grades[i] = temp2;
 	}
 }
 
-void BubbleSort(int grades[], int count) {
+void BubbleSort(Str names[], int grades[], int count) {
 	for (int i = 0; i < count; i++)
 		for (int j = 0; j < count; j++)
 			if (grades[j + 1] > grades[j]) {
-				int temp = grades[j];
+				Str temp;
+				strcpy(temp, names[j]);
+				strcpy(names[j], names[j + 1]);
+				strcpy(names[j + 1], temp);
+				int temp2 = grades[j];
 				grades[j] = grades[j + 1];
-				grades[j + 1] = temp;
+				grades[j + 1] = temp2;
 			}
 }
 
@@ -53,7 +63,7 @@ int main() {
 
 		cout << endl;
 
-		BubbleSort(grades, i);
+		BubbleSort(names, grades, i);
 		Print(names, grades, i);
 	}
 	else cout << "Invalid file" << endl;

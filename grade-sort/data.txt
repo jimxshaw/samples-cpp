@@ -1,6 +1,8 @@
 Bill 67
+Sam 95
 James 100
 Randy 93
 Joanna 88
+Chris 41
 Jessi 80
 Larry 60
